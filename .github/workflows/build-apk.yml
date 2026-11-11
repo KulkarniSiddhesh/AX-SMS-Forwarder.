@@ -1,4 +1,3 @@
-
 name: Build Android APK
 
 on:
@@ -29,18 +28,13 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Extract Android project
-        run: |
-          mkdir -p project
-          unzip -o AX-SMS-Forwarder-Android-Project.zip -d project
-
       - name: Build debug APK
-        run: gradle -p project assembleDebug
+        run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: AX-SMS-Forwarder-debug
-          path: project/app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
